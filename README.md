@@ -1,36 +1,36 @@
 # bloknot `/блокнот/`
-list of my cheatsheets, command line hacks, templates, etc. 
-
+لیست دستور‌ها و تقلب‌های کامندلاین (و یه سری ابزار های دیگه)
 
 ## bash 
 
-* current process, sorted by cpu usage. 4 direction navigate via `less`
+* پروسس های فعال مرتب شده بر اساس مصرف سی پی یو
 
 ```shell
 ps aux --sort -pcpu | less   
 ```
 
-* current process, sorted by memory usage. 4 direction navigate via `less`
+* پروسس های فعال مرتب شده بر اساس مموری
 
 ```shell
 ps aux --sort -pmem | less
 ```
  
-* firefox processes sorted by memory. 
+* پروسس هایی که مربوط به فایرفاکس میشن
 
 ```bash 
 ps aux --sort -pmem | grep "/usr/lib/firefox*" | less 
 ```
 
-* report: `firefox` cpu, and memory usage (percentage)
+* گزارش از مجموع استفاده یک ابزار مثل فایرفاکس از سی پی یو و مموری . به درصد گزارش شده
 
 ```bash
 # firefox memory, and cpu usage
+#  همین گزارش برای یه ابزار دیگه: فقط قسمت مشخص شده پایین را تغییر بدین
 # try another application,                  <------->  change this part
 ps aux | awk 'BEGIN {cpu=0;mem=0;i=0} $11 ~ /firefox/ { cpu+=$3;mem+=$4;i+=1; print $2 "\t" $3 "\t" $4 "\t" $11 } END { print "\ncpu\t" cpu "\nmem\t" mem "\ncount\t" i }'
 ```
 ```shell
-# sample output: 
+# نمونه خروجی
 3137	0.8	    3.0     	/usr/lib/firefox-nightly/firefox-bin
 10852	0.1	    1.4     	/usr/lib/firefox-nightly/firefox-bin
 ...
@@ -43,30 +43,30 @@ count   14
 ```
 
 ```bash 
-# less detail, prints last three lines
+# شبیه دستور بالایی ولی فقط سه تا خط آخر یا همون گزارش و می‌نویسه
 ps aux | awk 'BEGIN {cpu=0;mem=0;i=0} $11 ~ /firefox/ { cpu+=$3;mem+=$4;i+=1 } END { print "cpu\t" cpu "\nmem\t" mem "\ncount\t" i }' 
 ```
 
 
 ## .rc files
 
-### aliases
+### دستور های خلاصه شده برای فایل های آر-سی
 
-* docker
+* داکر
 
 ```shell 
 alias d="docker"
 alias d-c="docker-compose"
 ```
 
-* git
+* گیت
 
 ```shell
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias glogs="git log --graph --pretty=format:'%>>|(10) %Cred%h%Creset %C(cyan)|%an%Creset: %>>|(40) %Cblue|%cr%Creset %s  %Creset %C(yellow)%d%Creset ' --abbr$
 ```
 
-* editors
+* ادیتورها
 
 ```shell
 alias e='emacs -nw'
@@ -77,7 +77,7 @@ alias eg='gedit'
 
 * ssh 
 
-```ssh
+```shell
 alias ssh-modem='ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 admin@192.168.1.1'
 ```
 
