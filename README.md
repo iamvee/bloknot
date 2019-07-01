@@ -77,7 +77,7 @@ alias eg='gedit'
 
 * ssh 
 
-```ssh
+```shell
 alias ssh-modem='ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 admin@192.168.1.1'
 ```
 
